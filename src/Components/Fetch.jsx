@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import axios from 'axios'
 
 
 const Fetch = () => {
@@ -15,7 +16,17 @@ const Fetch = () => {
         .catch(err=>{
             console.log(err)
         })
+      }
+    const fetchWithAxios=()=>{
+      axios.get (`https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0`)
+      .then(response=>{
+          setPokemonList(response.data.results)
+      })
+      .catch (err=>{
+        console.log(err)
+      })
     }
+
   return (
     <div>
       <h1>Fetch Pokemon</h1>
@@ -26,6 +37,7 @@ const Fetch = () => {
         }
         </ul>
         <button onClick={fetchWithThen}> Fetch Pokemon</button>  
+        <button onClick={fetchWithAxios}> Fetch With Axios</button>
 
     </div>
 
